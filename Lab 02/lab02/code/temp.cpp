@@ -1,32 +1,37 @@
-
 #include <iostream>
 #include <stdlib.h>
 #include <string>
 
 using namespace std;
 
-void MyFunc ( int *array, int start, int max ) {  
+int split(int *array, int size, int i);
 
-  int pivot = array[max];
-  int m = 0;
-  int j = start-1;
-
-if (start < max) {
-  for (int i = start; i <= max; i++) {
-    if(array[i] < pivot) {
-      m++;
-      j++;
-      swap(array[j],array[i]);
-    }
-  }
-  if(array[j+1] > array[max]) {
-    swap (array[j+1], array[max]);
-  }
-  MyFunc(array, start, j);
-  MyFunc(array, j+2 , max);
-  }
-
+void QuickSort ( int *array , int size, int i) { //size isnt really a correct name here, size = high index 
+	if(i<size)
+	{
+		int s = split(array,size,i);
+		QuickSort(array,s-1,i);
+		QuickSort(array,size,s+1);
+	}
 }
+
+int split(int *array, int size, int i)
+{
+	int p = array[size];
+	int m = i-1;
+	for(int j = i; j<size;j++)
+	{
+		if(array[j]<p)
+		{
+			m++;
+			swap(array[m],array[j]);
+		}
+	}
+	if(array[size]<array[m+1])
+		swap(array[m+1],array[size]);
+	return m+1;
+}
+
 
 int main(int argc,char **argv) {
 
@@ -44,7 +49,7 @@ int main(int argc,char **argv) {
     cin >> Sequence[i];
 
   // Run your algorithms to manipulate the elements in Sequence
-  MyFunc(Sequence, 0, arraySize-1); 
+  QuickSort(Sequence, arraySize-1,0); 
     
   // Output the result
   for(int i=0; i<arraySize; i++)
