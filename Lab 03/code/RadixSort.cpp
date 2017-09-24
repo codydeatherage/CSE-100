@@ -1,35 +1,12 @@
+
 #include <iostream>
 #include <stdlib.h>
 #include <string>
 
 using namespace std;
 
-int split(int *array, int size, int i);
-
-void QuickSort ( int *array , int size, int i) { //size isnt really a correct name here, size = high index 
-	if(i<size)
-	{
-		int s = split(array,size,i);
-		QuickSort(array,s-1,i);
-		QuickSort(array,size,s+1);
-	}
-}
-
-int split(int *array, int size, int i)
-{
-	int p = array[size];
-	int m = i-1;
-	for(int j = i; j<size;j++)
-	{
-		if(array[j]<p)
-		{
-			m++;
-			swap(array[m],array[j]);
-		}
-	}
-	if(array[size]<array[m+1])
-		swap(array[m+1],array[size]);
-	return m+1;
+void MyFunc ( int *array ) {  
+  // ...
 }
 
 
@@ -49,7 +26,7 @@ int main(int argc,char **argv) {
     cin >> Sequence[i];
 
   // Run your algorithms to manipulate the elements in Sequence
-  QuickSort(Sequence, arraySize-1,0); 
+  MyFunc(Sequence); 
     
   // Output the result
   for(int i=0; i<arraySize; i++)
