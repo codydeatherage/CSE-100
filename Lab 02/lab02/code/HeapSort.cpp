@@ -46,14 +46,14 @@ int main(int argc,char **argv) {
   int arraySize;
 
   // Get the size of the sequence
-  cout <<"Enter size\n";
+  //cout <<"Enter size\n";
   cin >> arraySize;
 
   // Allocate enough memory to store "arraySize" integers
   Sequence = new int[arraySize];
     
   // Read in the sequence
-  cout << "Enter the sequence\n";
+  //cout << "Enter the sequence\n";
   for ( int i=0; i<arraySize; i++ )
     cin >> Sequence[i];
 
@@ -61,7 +61,7 @@ int main(int argc,char **argv) {
   MyFunc(Sequence, arraySize); 
     
   // Output the result
-  cout << "The sequence is:\n";
+  //cout << "The sequence is:\n";
   for(int i=0; i<arraySize; i++)
       cout << Sequence[i] << endl;
 

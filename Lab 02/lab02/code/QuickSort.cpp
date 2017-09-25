@@ -8,13 +8,11 @@ using namespace std;
 void MyFunc ( int *array, int start, int max ) {  
 
   int pivot = array[max];
-  int m = 0;
   int j = start-1;
 
 if (start < max) {
   for (int i = start; i <= max; i++) {
     if(array[i] < pivot) {
-      m++;
       j++;
       swap(array[j],array[i]);
     }
