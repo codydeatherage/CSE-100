@@ -5,20 +5,21 @@
 
 using namespace std;
 
-struct V{
-	int key[10];
+struct T{
+	int K[10];
 };
 
-void myFunc(T* array, int pos, int size)
+void myFunc(T* array, int size, int position)
 {
 	T* result;
-	result = new V[size];
+	result = new T[size];
 	int count[10];
-	for(int i = 0; i<10; i++)
+	for(int i = 0; i<10; i++) {
 		count[i]= 0;
+	}
 
 	for(int j = 0; j<size;j++) {
-		count[array[j].key[size]]++;
+		count[array[j].K[position]]++;
 	}
 
 	for(int x = 1; x<10; x++) {
@@ -27,22 +28,22 @@ void myFunc(T* array, int pos, int size)
 
 	for(int y = size-1; y >=0; y--)
 	{
-		result[count[array[y].key[size]]-1] = array[y];
-		count[array[y].key[size]]--;
+		result[count[array[y].K[position]]-1] = array[y];
+		count[array[y].K[position]]--;
 	}
 
-	for(int i = 0; i<size; i++)
+	for(int i = 0; i<size; i++) {
 		array[i] = result[i];
+	}
 	delete result;
 }
 
-void radixS (T* array, int size) {  
+void radixSort (T* array, int size) {  
 	for(int i = 9; i >=0; i--)
 	{
-		myFunc(array, i, size);
+		myFunc(array, size, i);
 	}
 }
-
 
 int main(int argc,char **argv) {
   int arraySize;
@@ -50,29 +51,26 @@ int main(int argc,char **argv) {
   // Get the size of the sequence
   cin >> arraySize;
 
-  // Allocate enough memory to store "arraySize" integers
   T* array;
-  array = new V [arraySize];
+  array = new T [arraySize];
     
   // Read in the sequence
-
   for(int i = 0; i<arraySize; i++)
   {
 	for(int j = 0; j<10; j++)
 	{
-		cin>>array[i].key[j];
-//		cout<<"\nINPUT: "<<buffer;
-//		cout<<"\nVAL: "<<val;
+		cin>>array[i].K[j];
+
 	}
   }
-  // Run your algorithms to manipulate the elements in Sequence
-  radixS(array, arraySize); 
+  
+  radixSort(array, arraySize); 
     
-  // Output the result
-  for(int x=0; i<arraySize; x++)
+  // Output 
+  for(int i=0; i<arraySize; i++)
       {
-	for(int y = 0; j<10;y++)
-		cout<<array[x].key[y]<<";";
+	for(int j = 0; j<10;j++)
+		cout<<array[i].K[j]<<";";
 	cout<<endl;
       }
     
