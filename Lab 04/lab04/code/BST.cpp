@@ -121,7 +121,7 @@ Node *BST::Search(int toFind) {
  if (x != NULL) {
   // 
   if (toFind == x -> val) {
-    return m;
+    return x;
   } else if (toFind < x -> val) {
       x = x -> left;
 
@@ -141,11 +141,11 @@ void BST::Print(TraversalOrder Order) {
     PostOrder(root);
 }
 
-void BST::PreOrder(Node *x) {
+void BST::PostOrder(Node *x) {
   if (x != NULL) {
     cout << x -> val << "\n";
-    PreOrder(x -> left);
-    PreOrder(x -> right);
+    PostOrder(x -> left);
+    PostOrder(x -> right); 
   }
 }
 
@@ -157,11 +157,14 @@ void BST::InOrder(Node *x) {
   }
 }
 
-void BST::PostOrder(Node *x) {
+void BST::PreOrder(Node *x) {
   if (x != NULL) {
     cout << x -> val << "\n";
-    PostOrder(x -> left);
-    PostOrder(x -> right); 
+    PreOrder(x -> left);
+    PreOrder(x -> right);
   }
 }
+
+
+
 
