@@ -136,14 +136,26 @@ void BST::Print(TraversalOrder Order) {
 }
 
 void BST::PreOrder(Node *x) {
-  // Write your code here
+  if (x != NULL) {
+    cout << x -> val << "\n";
+    PreOrder(x -> left);
+    PreOrder(x -> right);
+  }
 }
 
 void BST::InOrder(Node *x) {
-  // Write your code here
+  if (x != NULL) {
+    InOrder(x -> left);
+    cout << x -> val -> "\n";
+    InOrder(x -> right);
+  }
 }
 
 void BST::PostOrder(Node *x) {
-  // Write your code here
+  if (x != NULL) {
+    cout << x -> val << "\n";
+    PostOrder(x -> left);
+    PostOrder(x -> right); 
+  }
 }
 
