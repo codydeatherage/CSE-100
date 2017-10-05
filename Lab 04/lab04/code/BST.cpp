@@ -85,9 +85,18 @@ void BST::Transplant(Node *u, Node *v) {
 }
 
 Node *BST::Successor(Node *x) {
-  Node *y = x;
-
-  if (x->right != NULL) {
+  Node* z = x;
+  if(x->right!=NULL)
+    return Minimum(x->right);
+  Node *y = z->parent;
+  while(y!=NULL&&z==y->right)
+  {
+    z = y;
+    y = y->parent;
+  }
+  return y;
+}
+  /*if (x->right != NULL) {
     return Minimum(x -> right);
   }
   Node *z = y -> parent;
@@ -96,7 +105,8 @@ Node *BST::Successor(Node *x) {
     z = z -> parent;
   }
   return y;
-}
+}*/
+
 
 Node *BST::Minimum(Node *x) {
   Node *m = x;
@@ -123,10 +133,10 @@ Node *BST::Search(int toFind) {
     return x -> right;
 
   } else if (toFind < x -> val) {
-    return x -> left;
+      x = x -> right;
 
   } else if (toFind == x -> val) {
-    return x;
+      x = x -> left;
   }
  }
  return NULL;
