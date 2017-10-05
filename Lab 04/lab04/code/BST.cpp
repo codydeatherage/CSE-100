@@ -119,14 +119,13 @@ Node *BST::Search(int toFind) {
   // Node x; Begins search at the root
   Node *x = root;
  if (x != NULL) {
-  // 
   if (toFind == x -> val) {
     return x;
-  } else if (toFind < x -> val) {
-      x = x -> left;
+  } else if (toFind > x -> val) {
+      x = x -> right;
 
   } else {
-      return x -> right;
+      x = x -> left;
   }
  }
  return NULL;
@@ -141,12 +140,13 @@ void BST::Print(TraversalOrder Order) {
     PostOrder(root);
 }
 
-void BST::PostOrder(Node *x) {
+void BST::PreOrder(Node *x) {
   if (x != NULL) {
     cout << x -> val << "\n";
-    PostOrder(x -> left);
-    PostOrder(x -> right); 
+    PreOrder(x -> left);
+    PreOrder(x -> right);
   }
+  return;
 }
 
 void BST::InOrder(Node *x) {
@@ -155,16 +155,14 @@ void BST::InOrder(Node *x) {
     cout << x -> val << "\n";
     InOrder(x -> right);
   }
+  return;
 }
 
-void BST::PreOrder(Node *x) {
+void BST::PostOrder(Node *x) {
   if (x != NULL) {
     cout << x -> val << "\n";
-    PreOrder(x -> left);
-    PreOrder(x -> right);
+    PostOrder(x -> left);
+    PostOrder(x -> right); 
   }
+  return;
 }
-
-
-
-
