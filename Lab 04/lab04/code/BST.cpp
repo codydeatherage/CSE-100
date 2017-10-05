@@ -35,7 +35,7 @@ void BST::Insert(int toInsert) {
     // x = new Node();
     x -> parent = y;
     if (y == NULL) { //Tree was empty
-      root = x
+      root = x;
     } else if (x -> val < y -> val) {
       y -> left = x;
     } else {
@@ -46,14 +46,14 @@ void BST::Insert(int toInsert) {
 
 void BST::Delete(int toDelete) {
   //Locates node and saves the node that is to be deleted
-  node* d = Search(toDelete);
+  Node* d = Search(toDelete);
   if (d -> left == NULL) {
     Transplant(d, d -> right);
-  } else if (d -> right = NULL) {
+  } else if (d -> right == NULL) {
     Transplant(d, d -> left);
   } else {
     //Tree-minimum in psudo code is the Minimum function
-    node *y = Minimum(d -> right);
+    Node *y = Minimum(d -> right);
     if (y -> parent != d) {
       Transplant(y, y-> right);
       //y -> right = d -> right;
@@ -67,7 +67,7 @@ void BST::Delete(int toDelete) {
 }
 
 void BST::Transplant(Node *u, Node *v) {
-  if (u-> parent = NULL) {
+  if (u-> parent == NULL) {
     root = u;
   } else if (u == u -> parent -> left) {
     u -> parent -> left = v;
@@ -86,7 +86,7 @@ Node *BST::Successor(Node *x) {
     return Minimum(x -> right);
   }
   y = x -> parent;
-  while (y != NULL && x = y -> right) {
+  while (y != NULL && x == y -> right) {
     x = y;
     y = y -> parent;
   }
@@ -94,7 +94,7 @@ Node *BST::Successor(Node *x) {
 }
 
 Node *BST::Minimum(Node *x) {
-  while (x.left != NULL) {
+  while (x -> left != NULL) {
     x = x->left;
   }
   return x;
@@ -121,9 +121,8 @@ Node *BST::Search(int toFind) {
   } else if (toFind == x -> val) {
     return x;
   }
-  return NULL;
  }
-
+ return NULL;
 }
 
 void BST::Print(TraversalOrder Order) {
@@ -146,7 +145,7 @@ void BST::PreOrder(Node *x) {
 void BST::InOrder(Node *x) {
   if (x != NULL) {
     InOrder(x -> left);
-    cout << x -> val -> "\n";
+    cout << x -> val << "\n";
     InOrder(x -> right);
   }
 }
