@@ -24,69 +24,71 @@ BST::~BST() {
 }
 
 void BST::Insert(int toInsert) {
-  //Took psudo 
- Node *y = NULL;
- Node *x = root;
-
- while (x != NULL) {
-    y = x;
-    if (toInsert < x -> val) {
+  //Psudo Code
+  Node *y = NULL;
+  Node *x = root;
+  while(x!=NULL)
+  {
+    y=x;
+    if(toInsert<x->val)
+    {
       x = x->left;
-    } else {
+    }
+    else
       x = x->right;
-    }
-    x = new Node();
-    x -> parent = y;
-    x -> val = toInsert;
-    if (y == NULL) { //Tree was empty
-      root = x;
-    } else if (x -> val < y -> val) {
-      y -> left = x;
-    } else {
-      y -> right = x;
-    }
   }
+
+  x = new Node();
+  x->parent = y;
+  x->val = toInsert;
+
+  if(y==NULL)
+    root = x;
+  else if(x -> val < y -> val)
+    y->left = x;
+  else
+    y->right = x;
 }
 
 void BST::Delete(int toDelete) {
-  //Locates node and saves the node that is to be deleted
-  Node* d = Search(toDelete);
-  if (d == NULL) {
+  //Psudo Code
+  Node *m = Search(toDelete);
+  if(m== NULL)
     return;
-  }
-  if (d -> left == NULL) {
-      Transplant(d, d -> right);
-  } else if (d -> right == NULL) {
-      Transplant(d, d -> left);
-  } else {
-    //Tree-minimum in psudo code is the Minimum function
-    Node *y = Minimum(d -> right);
-    if (y -> parent != d) {
-      Transplant(y, y-> right);
-      y -> right = d -> right;
+
+  if(m->left == NULL)
+    Transplant(m,m->right);
+  else if (m->right==NULL)
+    Transplant(m,m->left);
+  else
+  {
+    Node *y = Minimum(m->right);
+    if(y -> parent != m)
+    {
+      Transplant(y,y -> right);
+      y -> right = m -> right;
       y -> right -> parent = y;
     }
-    Transplant(d,y);
-    y -> left = d -> left;
-    y -> left -> parent = y;
+    Transplant(m,y);
+    y->left = m->left;
+    y->left->parent = y;
   }
-
 }
 
 void BST::Transplant(Node *u, Node *v) {
-  if (u-> parent == NULL) {
+  //Psudo Code
+  if(u->parent == NULL)
     root = v;
-  } else if (u == u -> parent -> left) {
-    u -> parent -> left = v;
-  } else {
-    u -> parent -> right = v;
-  }
-  if (v != NULL) {
-    v -> parent = u -> parent;
-  }
+  else if(u == u->parent->left)
+    u->parent->left = v;
+  else
+    u->parent->right = v;
+  if(v!=NULL)
+    v->parent = u->parent;
 }
 
 Node *BST::Successor(Node *x) {
+  //Psudo Code
   Node* z = x;
   if(x->right!=NULL)
     return Minimum(x->right);
@@ -100,35 +102,38 @@ Node *BST::Successor(Node *x) {
 }
 
 Node *BST::Minimum(Node *x) {
+  //Psudo Code
   Node *m = x;
-  while (m -> left != NULL) {
-    m = m->left;
-  }
-  return m;
+        while(m->left!=NULL)
+                m = m->left;
+        return m;
 }
 
 Node *BST::Maximum(Node *x) {
+  //Psudo Code
   Node *m = x;
-  while (m->right != NULL) {
+  while(m->right!=NULL)
     m = m->right;
-  }
   return m;
+    
 }
 
 Node *BST::Search(int toFind) {
-  // Node x; Begins search at the root
   Node *x = root;
- if (x != NULL) {
-  if (toFind == x -> val) {
-    return x;
-  } else if (toFind > x -> val) {
+  while(x != NULL)
+  {
+    if(toFind == x -> val)
+      return x;
+    else if(toFind > x -> val)
+    {
       x = x -> right;
-
-  } else {
+    }
+    else
+    {
       x = x -> left;
-  }
- }
- return NULL;
+    }
+  } 
+  return NULL;
 }
 
 void BST::Print(TraversalOrder Order) {
