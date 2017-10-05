@@ -25,11 +25,11 @@ BST::~BST() {
 
 void BST::Insert(int toInsert) {
   //Took psudo 
- Node *y = NULL;code
+ Node *y = NULL;
  Node *x = root;
 
  while (x != NULL) {
-  y = x;
+    y = x;
     if (toInsert < x -> val) {
       x = x->left;
     } else {
@@ -55,9 +55,9 @@ void BST::Delete(int toDelete) {
     return;
   }
   if (d -> left == NULL) {
-    Transplant(d, d -> right);
+      Transplant(d, d -> right);
   } else if (d -> right == NULL) {
-    Transplant(d, d -> left);
+      Transplant(d, d -> left);
   } else {
     //Tree-minimum in psudo code is the Minimum function
     Node *y = Minimum(d -> right);
@@ -98,17 +98,6 @@ Node *BST::Successor(Node *x) {
   }
   return y;
 }
-  /*if (x->right != NULL) {
-    return Minimum(x -> right);
-  }
-  Node *z = y -> parent;
-  while (z != NULL && y == z -> right) {
-    y = z;
-    z = z -> parent;
-  }
-  return y;
-}*/
-
 
 Node *BST::Minimum(Node *x) {
   Node *m = x;
@@ -131,14 +120,13 @@ Node *BST::Search(int toFind) {
   Node *x = root;
  if (x != NULL) {
   // 
-  if (toFind > x -> val) {
-    return x -> right;
-
+  if (toFind == x -> val) {
+    return m;
   } else if (toFind < x -> val) {
-      x = x -> right;
-
-  } else if (toFind == x -> val) {
       x = x -> left;
+
+  } else {
+      return x -> right;
   }
  }
  return NULL;
