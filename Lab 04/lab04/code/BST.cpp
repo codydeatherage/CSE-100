@@ -10,6 +10,7 @@ using namespace std;
  *   Creates an empty binary tree
  ****************************************************************/
 BST::BST() {
+  root = NULL;
 }
 
 /****************************************************************
@@ -48,6 +49,9 @@ void BST::Insert(int toInsert) {
 void BST::Delete(int toDelete) {
   //Locates node and saves the node that is to be deleted
   Node* d = Search(toDelete);
+  if (d == NULL) {
+    return;
+  }
   if (d -> left == NULL) {
     Transplant(d, d -> right);
   } else if (d -> right == NULL) {
@@ -57,7 +61,7 @@ void BST::Delete(int toDelete) {
     Node *y = Minimum(d -> right);
     if (y -> parent != d) {
       Transplant(y, y-> right);
-      //y -> right = d -> right;
+      y -> right = d -> right;
       y -> right -> parent = y;
     }
     Transplant(d,y);
@@ -69,7 +73,7 @@ void BST::Delete(int toDelete) {
 
 void BST::Transplant(Node *u, Node *v) {
   if (u-> parent == NULL) {
-    root = u;
+    root = v;
   } else if (u == u -> parent -> left) {
     u -> parent -> left = v;
   } else {
@@ -87,7 +91,7 @@ Node *BST::Successor(Node *x) {
     return Minimum(x -> right);
   }
   Node *z = y -> parent;
-  while (y != NULL && x == z -> right) {
+  while (z != NULL && y == z -> right) {
     y = z;
     z = z -> parent;
   }
