@@ -32,8 +32,9 @@ void BST::Insert(int toInsert) {
     } else {
       x = x->right;
     }
-    // x = new Node();
+    x = new Node();
     x -> parent = y;
+    x -> val = toInsert;
     if (y == NULL) { //Tree was empty
       root = x;
     } else if (x -> val < y -> val) {
@@ -57,7 +58,7 @@ void BST::Delete(int toDelete) {
     if (y -> parent != d) {
       Transplant(y, y-> right);
       //y -> right = d -> right;
-      y -> right -> parent = d;
+      y -> right -> parent = y;
     }
     Transplant(d,y);
     y -> left = d -> left;
@@ -85,26 +86,28 @@ Node *BST::Successor(Node *x) {
   if (x->right != NULL) {
     return Minimum(x -> right);
   }
-  y = x -> parent;
-  while (y != NULL && x == y -> right) {
-    x = y;
-    y = y -> parent;
+  Node *z = y -> parent;
+  while (y != NULL && x == z -> right) {
+    y = z;
+    z = z -> parent;
   }
   return y;
 }
 
 Node *BST::Minimum(Node *x) {
-  while (x -> left != NULL) {
-    x = x->left;
+  Node *m = x;
+  while (m -> left != NULL) {
+    m = m->left;
   }
-  return x;
+  return m;
 }
 
 Node *BST::Maximum(Node *x) {
-  while (x->right != NULL) {
-    x = x->right;
+  Node *m = x;
+  while (m->right != NULL) {
+    m = m->right;
   }
-  return x;
+  return m;
 }
 
 Node *BST::Search(int toFind) {
