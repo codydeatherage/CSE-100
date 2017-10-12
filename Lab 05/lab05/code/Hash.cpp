@@ -10,8 +10,9 @@ using namespace std;
 /****************************************************************
  * CONSTRUCTOR
  ****************************************************************/
-Hash::Hash(int bNo) {
+Hash::Hash(int _bNo) {
 	//Resizes the container so that it contains  bNo elements
+	bNo = _bNo;
 	table.resize(bNo);
 }
 
@@ -35,14 +36,12 @@ bool Hash::Delete(int toDelete) {
 	int _pos;
 
 	if (Search(toDelete, _bucket, _pos)) {
-		// advance (iterator, n)
-		// iteration to be advanced with the value of n
 		iter I = table[_bucket].begin();
 		advance(I,_pos);
 		table[_bucket].erase(I);
-
-	} 
-		return false;
+		return true;
+	}
+	return false;
 }
 
 bool Hash::Search(int key, int& _bucket, int& _pos) {
